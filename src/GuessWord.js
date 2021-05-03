@@ -15,21 +15,19 @@ const GuessWord = props => {
             </tr>
         ));
         contents = (
-            <div data-test="guessed-words">
-                <h3>Guessed words</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Guess</th>
-                            <th>Matching Letters</th>
-                        </tr>
-                        <tbody>
-                            { guessRow }
-                        </tbody>
-                    </thead>
-                </table>
-            </div>
-        );
+			<div data-test='guessed-words'>
+				<h3>Guessed words</h3>
+				<table className='table table-sm'>
+					<thead className="thead-light">
+						<tr>
+							<th>Guess</th>
+							<th>Matching Letters</th>
+						</tr>
+					</thead>
+                    <tbody>{guessRow}</tbody>
+				</table>
+			</div>
+		);
     }
 	return <div data-test='component-guessed-words'>{contents}</div>;
 };
