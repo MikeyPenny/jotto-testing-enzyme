@@ -7,6 +7,13 @@ const setup = (secretWord = 'nelson') => {
 	return shallow(<Input secretWord={secretWord} />);
 };
 
+const mockSetCurrentGuess = jest.fn();
+
+jest.mock('react', () => ({
+	...jest.requireActual('react'),
+	useState: intialState => [intialState, mockSetCurrentGuess],
+}));
+
 test('renders without errors', () => {
 	const wrapper = setup();
 	const component = findByTestAttr(wrapper, 'input-comp');
@@ -23,9 +30,6 @@ test('does not warning with expected props', () => {
 
 describe('state controlled input field', () => {
 	test('updates when input changed', () => {
-		const mockSetCurrentGuess = jest.fn();
-		React.useState = jest.fn(() => ['', mockSetCurrentGuess]);
-
 		const wrapper = setup();
 		const input = findByTestAttr(wrapper, 'input-box');
 		const mockEvent = { target: { value: 'train' } };
