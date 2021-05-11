@@ -1,12 +1,22 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const Input = ({ secretWord }) => {
+const Input = ({ success, secretWord }) => {
 	const [currentGuess, setCurrentGuess] = useState('');
 
 	const guessChangeHandler = ev => {
 		setCurrentGuess(ev.target.value);
 	};
+
+	const onSubmitHandler = (ev) => {
+		ev.preventDefault();
+
+		setCurrentGuess('');
+	};
+
+	if (success) {
+		return <div data-test='input-comp'></div> 
+	}
 
 	return (
 		<div data-test='input-comp'>
@@ -20,12 +30,14 @@ const Input = ({ secretWord }) => {
 					onChange={ev => guessChangeHandler(ev)}
 				/>
 				<button
-					data-test='submit-button'
-					className='btn btn-primary mb-2'
-				>
-					Submit
-				</button>
+				data-test='submit-button'
+				className='btn btn-primary mb-2'
+				onClick={(ev) => onSubmitHandler(ev)}
+			>
+				Submit
+			</button>
 			</form>
+			
 		</div>
 	);
 };
